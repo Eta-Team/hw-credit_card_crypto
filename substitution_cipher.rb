@@ -9,8 +9,16 @@ module SubstitutionCipher
     #   document: String
     #   key: Fixnum (integer)
     # Returns: String
+    def self.string_array_of_numbers(document)
+      document.to_s.chars.map do |letter|
+        (letter.downcase.ord - 'a'.ord + 1)
+      end
+    end
+
     def self.encrypt(document, key)
       # TODO: encrypt string using caesar cipher
+      arr = string_array_of_numbers(document)
+      arr.map { |number| ((((number + key) % 94) % 94) + 'a'.ord - 1).chr }.join
     end
 
     # Decrypts String document using integer key
@@ -20,6 +28,8 @@ module SubstitutionCipher
     # Returns: String
     def self.decrypt(document, key)
       # TODO: decrypt string using caesar cipher
+      arr = string_array_of_numbers(document)
+      arr.map { |number| ((((number - key) % 94) % 94) + 'a'.ord - 1).chr }.join
     end
   end
 
