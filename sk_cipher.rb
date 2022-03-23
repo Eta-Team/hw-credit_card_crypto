@@ -21,6 +21,6 @@ module ModernSymmetricCipher
     #       Expect Base64 encrypted message and Base64 key
     encoded_text = Base64.strict_decode64(encrypted_cc)
     secret_box = RbNaCl::SecretBox.new(key)
-    secret_box.decypt(encoded_text)
+    secret_box.decrypt(encoded_text)
   end
 end
