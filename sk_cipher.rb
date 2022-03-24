@@ -22,12 +22,8 @@ module ModernSymmetricCipher
     # TODO: Decrypt from encrypted message above
     #       Expect Base64 encrypted message and Base64 key
     encoded_text = Base64.strict_decode64(encrypted_cc)
-<<<<<<< HEAD
-    secret_box = RbNaCl::SecretBox.new(key)
-=======
     new_key = Base64.decode64(key)
     secret_box = RbNaCl::SimpleBox.from_secret_key(new_key)
->>>>>>> 384ab94f7406da465c53b0595022b098961eb31a
-    secret_box.decypt(encoded_text)
+    secret_box.decrypt(encoded_text)
   end
 end
