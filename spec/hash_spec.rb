@@ -36,8 +36,10 @@ describe 'Test hashing requirements' do
   describe 'Check for unique hashes' do
     # TODO: Check that each card produces a different hash than other cards
     it 'Should produce a different hash than other cards' do
-      hashed_cards = cards.map(&:hash_secure)
+     secure_hashed_cards = cards.map(&:hash_secure)
+     hashed_cards = cards.map(&:hash)
       _(hashed_cards.uniq.size).must_equal hashed_cards.size
+      _(secure_hashed_cards.uniq.size).must_equal secure_hashed_cards.size
       # hashed_cards = cards.map(&:hash_secure)
       # puts hashed_cards
     end
