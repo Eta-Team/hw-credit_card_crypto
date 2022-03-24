@@ -22,27 +22,35 @@ cards = card_details.map do |c|
 end
 
 describe 'Test hashing requirements' do
-  describe 'Test regular hashing' do
     describe 'Check hashes are consistently produced' do
       # TODO: Check that each card produces the same hash if hashed repeatedly
+      it 'Should produce the same hash if hashed repeatedly' do
+      cards.each { |each_card| 
+        each_card.hash_secure.must_equal each_card.hash_secure 
+        each_card.hash.must_equal each_card.hash
+        each_card.wont_be_nil}
+      end
     end
 
     describe 'Check for unique hashes' do
       # TODO: Check that each card produces a different hash than other cards
-    end
-  end
+      it 'Should produce a different hash than other cards' do
+        is_crypto=false
+        hashed_cards = is_crypto ? cards.map(&:hash_secure) : cards.map(&:hash)
+      _(hashed_cards.uniq.size).must_equal hashed_cards.size
 
-  describe 'Test cryptographic hashing' do
-    describe 'Check hashes are consistently produced' do
-      # TODO: Check that each card produces the same hash if hashed repeatedly
-    end
-
-    describe 'Check for unique hashes' do
-      # TODO: Check that each card produces a different hash than other cards
+      end
     end
 
     describe 'Check regular hash not same as cryptographic hash' do
       # TODO: Check that each card's hash is different from its hash_secure
+      it 'should verify that regular has is different from crypto hash' do
+        cards.each{ |each_card| 
+          each_card.hash_secure.wont_equal each_card.hash
+          each_card.wont_be_nil
+        }
+       
+      end
     end
-  end
+  
 end
